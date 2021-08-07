@@ -26,6 +26,10 @@ namespace ShapeLibrary
         #endregion
         #region Methods
 
+        /// <summary>
+        /// Add line directly
+        /// </summary>
+        /// <param name="line"></param>
         public void AddLine(Line line)
         {
             // Need to link the edge to a point
@@ -40,12 +44,39 @@ namespace ShapeLibrary
             // so we can avoid adding twice
         }
 
-        public void AddShape(IShape shape)
+        /// <summary>
+        /// Add a point directly
+        /// </summary>
+        /// <param name="point"></param>
+        public void AddPoint(Point point)
         {
-            foreach
-            _shapes.Add(shape);
+            _points.Add(point);
         }
 
+        public void AddShape(IShape shape)
+        {
+            if (shape.GetType() == typeof(Line))
+            {
+                AddLine((Line)shape);
+            }
+            else if (shape.GetType() == typeof(Point))
+            {
+                AddPoint((Point)shape);
+            }
+            else
+            {
+                throw new NotImplementedException("Shape not supported");
+                _shapes.Add(shape);
+            }
+        }
+
+        /// <summary>
+        /// Create or get an existing point
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <returns></returns>
         public Point GetPoint(double x, double y, double z)
         {
             Point point = new Point(x, y, z);
