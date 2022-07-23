@@ -5,25 +5,27 @@ using System.Text;
 
 namespace ShapeLibrary
 {
-    public class Point : Shape, IShape, IComparable, IComparable<Point>
+    public class SHPPoint : SHPShape, IShape, IComparable, IComparable<SHPPoint>
     {
         #region Fields
 
-        double _x;
-        double _y;
-        double _z;
+        private double _x;
+        private double _y;
+        private double _z;
         private List<IShape> _shapes;
 
 
         #endregion
         #region Constructor
-        public Point()
+        public SHPPoint()
         {
+            _type = ShapeType.Point;
             _shapes = new List<IShape>();
         }
 
-        public Point(double x, double y, double z)
+        public SHPPoint(double x, double y, double z)
         {
+            _type = ShapeType.Point;
             _shapes = new List<IShape>();
             _x = x;
             _y = y;
@@ -45,6 +47,10 @@ namespace ShapeLibrary
             {
                 return (_x);
             }
+            set
+            {
+                _x = value;
+            }
         }
 
         public double Y
@@ -52,6 +58,10 @@ namespace ShapeLibrary
             get
             {
                 return (_y);
+            }
+            set
+            {
+                _y = value;
             }
         }
 
@@ -87,7 +97,7 @@ namespace ShapeLibrary
         {
             bool intersect = true;
 
-            if (shape.GetType() == typeof(Point))
+            if (shape.GetType() == typeof(SHPPoint))
             {
                 
             }
@@ -109,7 +119,7 @@ namespace ShapeLibrary
 
         public override bool Equals(object obj)
         {
-            Point point = (Point)obj;
+            SHPPoint point = (SHPPoint)obj;
 
             if (_x.Equals(point.X) != true)
             {
@@ -131,10 +141,10 @@ namespace ShapeLibrary
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(_x, _y, _z);
+            return (HashCode.Combine(_x, _y, _z));
         }
 
-        int IComparable<Point>.CompareTo(Point other)
+        int IComparable<SHPPoint>.CompareTo(SHPPoint other)
         {
             if (_x.CompareTo(other.X) != 0)
             {
@@ -156,7 +166,7 @@ namespace ShapeLibrary
 
         public int CompareTo(object obj)
         {
-            Point other = (Point)obj;
+            SHPPoint other = (SHPPoint)obj;
 
             if (_x.CompareTo(other.X) != 0)
             {

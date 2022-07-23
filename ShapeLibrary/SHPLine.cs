@@ -4,75 +4,68 @@ using System.Text;
 
 namespace ShapeLibrary
 {
-    public class Arc : Shape, IShape
+    public class SHPLine : SHPShape, IShape
     {
-        // Assue that the axis is defined as 0,0 is bottom left
-        // as this fits better with plotter and paper based
-        // geometry
-
         #region Field
 
-        Point _from;
-        Point _to;
-        Point _center;
-        double _radius;
-        double _start;
-        double _end;
-        bool _visited = false;
+        SHPPoint _from;
+        SHPPoint _to;
 
         #endregion
         #region Constructor
 
-        public Arc(Point from, Point to, double radius)
+        public SHPLine()
         {
-            _from = from;
-            _to = to;
-            _radius = radius;
-
-            // Calculate the centre and start and finish as the accuracy is challenging
+            _type = ShapeType.Line;
         }
 
-        public Arc(Point center, double radius, double start, double end)
+        public SHPLine(SHPPoint from, SHPPoint to)
         {
-            // Need to calculate the from and to points
-            _center = center;
-            _radius = radius;
-            _start = start;
-            _end = end;
-
-            // calculate the start and end points
+            _type = ShapeType.Line;
+            _from = from;
+            _to = to;
         }
 
         #endregion
         #region Properties
 
-        public bool Visited
+        public SHPPoint From
         {
             get
             {
-                return (_visited);
+                return (_from);
             }
             set
             {
-                _visited = value;
+                _from = value;
+            }
+        }
+        public SHPPoint To
+        {
+            get
+            {
+                return (_to);
+            }
+            set
+            {
+                _to = value;
             }
         }
 
         #endregion
         #region Methods
-
         public bool IntersectsWith(IShape shape)
         {
             bool intersect = true;
 
-            if (shape.GetType() == typeof(Line))
+            if (shape.GetType() == typeof(SHPLine))
             {
-                Line line = (Line)shape;
+                SHPLine line = (SHPLine)shape; 
 
-                Point p1 = _from;
-                Point p2 = _to;
-                Point p3 = line.From;
-                Point p4 = line.To;
+                SHPPoint p1 = _from;
+                SHPPoint p2 = _to;
+                SHPPoint p3 = line.From;
+                SHPPoint p4 = line.To;
 
                 // Get the segments' parameters.
 
@@ -108,6 +101,14 @@ namespace ShapeLibrary
             return (intersect);
         }
 
+        public override string ToString()
+        {
+            return ("from={" + _from + "},to={" + _to + "}");
+        }
+        public string ToJSON()
+        {
+            return ("[{\"from\":" + _from + "},{\"to\":" + _to + "}]");
+        }
         #endregion
     }
 }

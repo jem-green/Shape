@@ -5,9 +5,34 @@ VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShapeLibrary", "ShapeLibrary\ShapeLibrary.csproj", "{C7FA7F92-D988-4ACE-B2D8-9C6B96773E09}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShapeConsole", "ShapeConsole\ShapeConsole.csproj", "{C571AE40-61EE-4A03-8CC8-31B46252D9F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShapeTerminal", "ShapeTerminal\ShapeTerminal.csproj", "{C571AE40-61EE-4A03-8CC8-31B46252D9F8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ThirdParty", "ThirdParty", "{40CCADFE-C009-4F54-BEC8-CBF8C475BD7C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShapeTest", "ShapeTest\ShapeTest.csproj", "{66906FD8-676A-42E7-B5E4-44E6D042B9A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tracer", "Tracer", "{D86137E0-4B3C-4AB9-866C-EC70BE201E61}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "netcoreapp3.1", "netcoreapp3.1", "{F8702FE7-5C39-4940-90F7-8CC7BBD003BF}"
+	ProjectSection(SolutionItems) = preProject
+		ThirdParty\TracerLibrary\netcoreapp3.1\TracerLibrary.dll = ThirdParty\TracerLibrary\netcoreapp3.1\TracerLibrary.dll
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShapeConsole", "ShapeConsole\ShapeConsole.csproj", "{1DCC2B7A-4F68-445E-8EC5-8EA6647D8521}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gcode", "Gcode", "{2D14F003-DAA0-41E6-822E-8263C11E7F29}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "netcoreapp3.1", "netcoreapp3.1", "{1559334F-6D29-4820-B670-4A40BC606ECA}"
+	ProjectSection(SolutionItems) = preProject
+		ThirdParty\GcodeLibrary\netcoreapp3.1\GcodeLibrary.dll = ThirdParty\GcodeLibrary\netcoreapp3.1\GcodeLibrary.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DXF", "DXF", "{1FE51123-4380-48D1-A2E9-0D9A21B29B87}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "netcoreapp3.1", "netcoreapp3.1", "{00502745-5415-4C4D-BE16-08923DAE5911}"
+	ProjectSection(SolutionItems) = preProject
+		ThirdParty\DXFLibrary\netcoreapp3.1\DXFLibrary.dll = ThirdParty\DXFLibrary\netcoreapp3.1\DXFLibrary.dll
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,9 +48,25 @@ Global
 		{C571AE40-61EE-4A03-8CC8-31B46252D9F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C571AE40-61EE-4A03-8CC8-31B46252D9F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C571AE40-61EE-4A03-8CC8-31B46252D9F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66906FD8-676A-42E7-B5E4-44E6D042B9A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66906FD8-676A-42E7-B5E4-44E6D042B9A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66906FD8-676A-42E7-B5E4-44E6D042B9A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66906FD8-676A-42E7-B5E4-44E6D042B9A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DCC2B7A-4F68-445E-8EC5-8EA6647D8521}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DCC2B7A-4F68-445E-8EC5-8EA6647D8521}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DCC2B7A-4F68-445E-8EC5-8EA6647D8521}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DCC2B7A-4F68-445E-8EC5-8EA6647D8521}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D86137E0-4B3C-4AB9-866C-EC70BE201E61} = {40CCADFE-C009-4F54-BEC8-CBF8C475BD7C}
+		{F8702FE7-5C39-4940-90F7-8CC7BBD003BF} = {D86137E0-4B3C-4AB9-866C-EC70BE201E61}
+		{2D14F003-DAA0-41E6-822E-8263C11E7F29} = {40CCADFE-C009-4F54-BEC8-CBF8C475BD7C}
+		{1559334F-6D29-4820-B670-4A40BC606ECA} = {2D14F003-DAA0-41E6-822E-8263C11E7F29}
+		{1FE51123-4380-48D1-A2E9-0D9A21B29B87} = {40CCADFE-C009-4F54-BEC8-CBF8C475BD7C}
+		{00502745-5415-4C4D-BE16-08923DAE5911} = {1FE51123-4380-48D1-A2E9-0D9A21B29B87}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {45A1FACD-9E20-4D41-A6DE-5F3372630918}

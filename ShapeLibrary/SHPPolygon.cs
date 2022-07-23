@@ -4,23 +4,24 @@ using System.Text;
 
 namespace ShapeLibrary
 {
-    public class Polygon : Shape, IShape
+    public class SHPPolygon : SHPShape, IShape
     {
         #region Fields
 
-        private bool _closed = true;
-        private List<Point> _points;
+        private List<SHPPoint> _points;
         private bool _visited = false;
 
         #endregion
         #region Constructor
 
-        public Polygon()
+        public SHPPolygon()
         {
-            _points = new List<Point>();
+            _type = ShapeType.Polygon;
+            _closed = true;
+            _points = new List<SHPPoint>();
         }
 
-        public Polygon(List<Point> points)
+        public SHPPolygon(List<SHPPoint> points)
         {
             _points = points;
         }
@@ -36,7 +37,7 @@ namespace ShapeLibrary
             }
         }
 
-        public Point this[int index]
+        public SHPPoint this[int index]
         {
             get
             {
@@ -74,7 +75,7 @@ namespace ShapeLibrary
         {
             bool intersect = true;
 
-            if (shape.GetType() == typeof(Point))
+            if (shape.GetType() == typeof(SHPPoint))
             {
 
             }
@@ -85,9 +86,37 @@ namespace ShapeLibrary
             return (intersect);
         }
 
-        public void Add(Point point)
+        /// <summary>
+        /// Add points in sequence
+        /// </summary>
+        /// <param name="point"></param>
+        public void Add(SHPPoint point)
         {
             _points.Add(point);
+        }
+
+        public override string ToString()
+        {
+            string data = "";
+            foreach (SHPPoint point in _points)
+            {
+                data = data + ("point=" + point + ",");
+            }
+            data = data.TrimEnd(',');
+            return (data);
+        }
+
+        public string ToJSON()
+        {
+            string data;
+            data = "[";
+            foreach (SHPPoint point in _points)
+            {
+                data = data + "{point\":" + point + "},";
+            }
+            data = data.TrimEnd(',');
+            data = data + "]";
+            return (data);
         }
 
         #endregion

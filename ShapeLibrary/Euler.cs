@@ -28,13 +28,13 @@ namespace ShapeLibrary
         private int FindRoot()
         {
             int root = 1; //Assume root as 1
-            count = 0;
+            int count = 0;
             for (int i = 0; i < total; i++)
             {
                 if (GetDegree(i) % 2 != 0)
                 {
                     count++;
-                    root = i;//Store the node which has odd degree to root variable
+                    root = i;   //Store the node which has odd degree to root variable
                 }
             }
             //If count is not exactly 2 then euler path/circuit not possible so return 0
