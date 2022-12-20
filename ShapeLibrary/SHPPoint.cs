@@ -31,6 +31,7 @@ namespace ShapeLibrary
             _y = y;
             _z = z;
         }
+
         #endregion
         #region Properties
 

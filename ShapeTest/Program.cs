@@ -195,8 +195,14 @@ namespace ShapeConsole
         /// </summary>
         public static void EndpointTest()
         {
-            // Translate data and add the the shapes
             SHPDocument sp = new SHPDocument();
+
+            // need to create points and lines and confirm that only the endpoints intersect
+            /*
+             *    p1  p2 
+             *    +----+----+
+             *         p3   p4
+             */
 
             SHPPoint p1 = sp.GetPoint(0, 0, 0);
             SHPPoint p2 = sp.GetPoint(10, 0, 0);
@@ -220,6 +226,16 @@ namespace ShapeConsole
         public static void PolyTest()
         {
             SHPDocument sp = new SHPDocument();
+
+            // need to create points and lines and confirm that a polygon is formed
+            /*
+             * p1  p2 
+             * +----+
+             * |    |
+             * +----+
+             * p4  p3    
+             *    
+             */
 
             SHPPoint p1 = sp.GetPoint(0, 0, 0);
             SHPPoint p2 = sp.GetPoint(100, 0, 0);
@@ -271,17 +287,20 @@ namespace ShapeConsole
         {
             // Test the SHPLine function
 
-            /*     p2 +----+ p4
-             *        |    |
-             *        |    |
-             *        | p2 |
-             *        |    |
-             *        |
-             *        | p1 |
-             *     p1 +----+
-             *             |
+            /*             + p1
              *             | 
-             *  p3 +-------+ 
+             *             | 
+             *     p3 +----+----+ p4
+             *            p2
+             *
+             *
+             *             + p1
+             *             |
+             *             + p5
+             *              
+             *     p3 +---------+ p4
+             *            
+             *
              */
 
             SHPDocument sp = new SHPDocument();
