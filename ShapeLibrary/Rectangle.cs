@@ -7,11 +7,11 @@ namespace ShapeLibrary
     /// <summary>
     /// Rectangle comprising 4 lines
     /// </summary>
-    public class SHPRectangle : SHPShape, IShape
+    public class Rectangle : Shape, IShape
     {
         #region Field
 
-        private SHPPoint _topLeft;
+        private Point _topLeft;
         private double _width;
         private double _height;
         private bool _visited = false;
@@ -19,12 +19,12 @@ namespace ShapeLibrary
         #endregion
         #region Constructor
 
-        public SHPRectangle()
+        public Rectangle()
         {
             _type = ShapeType.Rectangle;
         }
 
-        public SHPRectangle(SHPPoint topLeft, double width, double height)
+        public Rectangle(Point topLeft, double width, double height)
         {
             _type = ShapeType.Rectangle;
 
@@ -40,7 +40,7 @@ namespace ShapeLibrary
         #endregion
         #region Properties
 
-        public SHPPoint TopLeft
+        public Point TopLeft
         {
             get
             {
@@ -137,7 +137,7 @@ namespace ShapeLibrary
         {
             bool intersect = true;
 
-            if (shape.GetType() == typeof(SHPRectangle))
+            if (shape.GetType() == typeof(Rectangle))
             {
 
             }
@@ -148,7 +148,7 @@ namespace ShapeLibrary
             return (intersect);
         }
 
-        public bool Contains(SHPRectangle rectangle)
+        public bool Contains(Rectangle rectangle)
         {
             bool overlap = true;
             overlap = overlap & (rectangle.X >= _topLeft.X);
@@ -158,7 +158,7 @@ namespace ShapeLibrary
             return (overlap);
         }
 
-        public bool IntersectsWith(SHPRectangle rectangle)
+        public bool IntersectsWith(Rectangle rectangle)
         {
             bool overlap = true;
             //overlap = overlap & (rectangle.X < (_to.X));

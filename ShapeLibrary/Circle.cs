@@ -5,20 +5,20 @@ using System.Text;
 namespace ShapeLibrary
 {
     /// <summary>
-    /// Rectangle primative
+    /// Rectangle primitive
     /// </summary>
-    public class SHPCircle : SHPShape, IShape
+    public class Circle : Shape, IShape
     {
         #region Field
 
-        private SHPPoint _center;
+        private Point _center;
         private double _radius;
         private bool _visited = false;
 
         #endregion
         #region Constructor
 
-        public SHPCircle()
+        public Circle()
         {
             _type = ShapeType.Circle;
         }
@@ -29,7 +29,7 @@ namespace ShapeLibrary
         /// </summary>
         /// <param name="center"></param>
         /// <param name="radius"></param>
-        public SHPCircle(SHPPoint center, double radius)
+        public Circle(Point center, double radius)
         {
             base._type = ShapeType.Circle;
             _center = center;
@@ -39,7 +39,7 @@ namespace ShapeLibrary
         #endregion
         #region Properties
 
-        public SHPPoint Center
+        public Point Center
         {
             get
             {
@@ -132,7 +132,7 @@ namespace ShapeLibrary
         {
             bool intersect = true;
 
-            if (shape.GetType() == typeof(SHPRectangle))
+            if (shape.GetType() == typeof(Rectangle))
             {
 
             }
@@ -143,13 +143,13 @@ namespace ShapeLibrary
             return (intersect);
         }
 
-        public bool Contains(SHPRectangle rectangle)
+        public bool Contains(Rectangle rectangle)
         {
             bool contains = false;
             return (contains);
         }
 
-        public bool IntersectsWith(SHPRectangle rectangle)
+        public bool IntersectsWith(Rectangle rectangle)
         {
             bool overlap = false;
             return (overlap);

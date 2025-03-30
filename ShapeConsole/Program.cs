@@ -8,14 +8,14 @@ namespace ShapeConsole
     {
         static void Main(string[] args)
         {
-            SHPDocument shpDocument = new SHPDocument();
-            SHPLine line = new SHPLine(new SHPPoint(5,5,0), new SHPPoint(10,10,0));
+            Document shpDocument = new Document();
+            Line line = new Line(new Point(5,5,0), new Point(10,10,0));
             shpDocument.AddLine(line);
             shpDocument.Save("", "test");
 
             // Test Loading
 
-            shpDocument = new SHPDocument();
+            shpDocument = new Document();
             shpDocument.Load("", "test");
             foreach(IShape shape in shpDocument)
             {

@@ -4,24 +4,24 @@ using System.Text;
 
 namespace ShapeLibrary
 {
-    public class SHPPolygon : SHPShape, IShape
+    public class Polygon : Shape, IShape
     {
         #region Fields
 
-        private List<SHPPoint> _points;
+        private List<Point> _points;
         private bool _visited = false;
 
         #endregion
         #region Constructor
 
-        public SHPPolygon()
+        public Polygon()
         {
             _type = ShapeType.Polygon;
             _closed = true;
-            _points = new List<SHPPoint>();
+            _points = new List<Point>();
         }
 
-        public SHPPolygon(List<SHPPoint> points)
+        public Polygon(List<Point> points)
         {
             _points = points;
         }
@@ -37,7 +37,7 @@ namespace ShapeLibrary
             }
         }
 
-        public SHPPoint this[int index]
+        public Point this[int index]
         {
             get
             {
@@ -75,7 +75,7 @@ namespace ShapeLibrary
         {
             bool intersect = true;
 
-            if (shape.GetType() == typeof(SHPPoint))
+            if (shape.GetType() == typeof(Point))
             {
 
             }
@@ -90,7 +90,7 @@ namespace ShapeLibrary
         /// Add points in sequence
         /// </summary>
         /// <param name="point"></param>
-        public void Add(SHPPoint point)
+        public void Add(Point point)
         {
             _points.Add(point);
         }
@@ -98,7 +98,7 @@ namespace ShapeLibrary
         public override string ToString()
         {
             string data = "";
-            foreach (SHPPoint point in _points)
+            foreach (Point point in _points)
             {
                 data = data + ("point=" + point + ",");
             }
@@ -110,7 +110,7 @@ namespace ShapeLibrary
         {
             string data;
             data = "[";
-            foreach (SHPPoint point in _points)
+            foreach (Point point in _points)
             {
                 data = data + "{point\":" + point + "},";
             }

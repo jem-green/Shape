@@ -4,11 +4,11 @@ using System.Text;
 
 namespace ShapeLibrary
 {
-    public class SHPShape
+    public class Shape
     {
         #region Fields
 
-        private SHPShape.SearchStatus _search = SHPShape.SearchStatus.None;
+        private Shape.SearchStatus _search = Shape.SearchStatus.None;
         private protected ShapeType _type = ShapeType.None;
         private protected bool _closed = false;
 

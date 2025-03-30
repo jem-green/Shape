@@ -12,7 +12,7 @@ namespace ShapeLibrary
         #region Constructors
         #endregion
         #region Properties
-        SHPShape.SearchStatus Status { get; set; }
+        Shape.SearchStatus Status { get; set; }
         #endregion
         #region Methods
         bool IntersectsWith(IShape shape);

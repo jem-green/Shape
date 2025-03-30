@@ -21,7 +21,7 @@ namespace ShapeConsole
 
         public static void ChainTest()
         {
-            SHPDocument sp = new SHPDocument();
+            Document sp = new Document();
 
             // need to create a list of points and how these are linked to lines
             /*
@@ -36,14 +36,14 @@ namespace ShapeConsole
              * p4
              */
 
-            SHPPoint p1 = sp.GetPoint(0, 0, 0);
-            SHPPoint p2 = sp.GetPoint(0, 100, 0);
-            SHPPoint p3 = sp.GetPoint(0, 200, 0);
-            SHPPoint p4 = sp.GetPoint(0, 300, 0);
+            Point p1 = sp.GetPoint(0, 0, 0);
+            Point p2 = sp.GetPoint(0, 100, 0);
+            Point p3 = sp.GetPoint(0, 200, 0);
+            Point p4 = sp.GetPoint(0, 300, 0);
 
-            SHPLine l1 = new SHPLine(p1, p2);
-            SHPLine l2 = new SHPLine(p2, p3);
-            SHPLine l3 = new SHPLine(p3, p4);
+            Line l1 = new Line(p1, p2);
+            Line l2 = new Line(p2, p3);
+            Line l3 = new Line(p3, p4);
 
             sp.AddLine(l1);
             sp.AddLine(l2);
@@ -55,7 +55,7 @@ namespace ShapeConsole
 
         public static void ReverseTest()
         {
-            SHPDocument sp = new SHPDocument();
+            Document sp = new Document();
 
             // need to create a list of points and how these are linked to lines
             /*
@@ -67,15 +67,15 @@ namespace ShapeConsole
              * 
              */
 
-            SHPPoint p1 = sp.GetPoint(0, 0, 0);
-            SHPPoint p2 = sp.GetPoint(100, 0, 0);
-            SHPPoint p3 = sp.GetPoint(100, 100, 0);
-            SHPPoint p4 = sp.GetPoint(0, 100, 0);
+            Point p1 = sp.GetPoint(0, 0, 0);
+            Point p2 = sp.GetPoint(100, 0, 0);
+            Point p3 = sp.GetPoint(100, 100, 0);
+            Point p4 = sp.GetPoint(0, 100, 0);
 
-            SHPLine l1 = new SHPLine(p2, p1);
-            SHPLine l2 = new SHPLine(p4, p3);
-            SHPLine l3 = new SHPLine(p4, p1);
-            SHPLine l4 = new SHPLine(p3, p2);
+            Line l1 = new Line(p2, p1);
+            Line l2 = new Line(p4, p3);
+            Line l3 = new Line(p4, p1);
+            Line l4 = new Line(p3, p2);
 
             sp.AddLine(l1);
             sp.AddLine(l2);
@@ -88,7 +88,7 @@ namespace ShapeConsole
 
         public static void BoxTest()
         {
-            SHPDocument sp = new SHPDocument();
+            Document sp = new Document();
 
             // need to create a list of points and how these are linked to lines
             /*
@@ -100,15 +100,15 @@ namespace ShapeConsole
              * 
              */
 
-            SHPPoint p1 = sp.GetPoint(0, 0, 0);
-            SHPPoint p2 = sp.GetPoint(100, 0, 0);
-            SHPPoint p3 = sp.GetPoint(100, 100, 0);
-            SHPPoint p4 = sp.GetPoint(0, 100, 0);
+            Point p1 = sp.GetPoint(0, 0, 0);
+            Point p2 = sp.GetPoint(100, 0, 0);
+            Point p3 = sp.GetPoint(100, 100, 0);
+            Point p4 = sp.GetPoint(0, 100, 0);
 
-            SHPLine l1 = new SHPLine(p1, p2);
-            SHPLine l2 = new SHPLine(p2, p3);
-            SHPLine l3 = new SHPLine(p3, p4);
-            SHPLine l4 = new SHPLine(p4, p1);
+            Line l1 = new Line(p1, p2);
+            Line l2 = new Line(p2, p3);
+            Line l3 = new Line(p3, p4);
+            Line l4 = new Line(p4, p1);
 
             sp.AddLine(l1);
             sp.AddLine(l2);
@@ -121,7 +121,7 @@ namespace ShapeConsole
 
         public static void EightTest()
         {
-            SHPDocument sp = new SHPDocument();
+            Document sp = new Document();
 
             // need to create a list of points and how these are linked to lines
             /*
@@ -134,20 +134,20 @@ namespace ShapeConsole
              *    p5  p6
              */
 
-            SHPPoint p1 = sp.GetPoint(0, 0, 0);
-            SHPPoint p2 = sp.GetPoint(100, 0, 0);
-            SHPPoint p3 = sp.GetPoint(100, 100, 0);
-            SHPPoint p4 = sp.GetPoint(0, 100, 0);
-            SHPPoint p5 = sp.GetPoint(0, 200, 0);
-            SHPPoint p6 = sp.GetPoint(100, 200, 0);
+            Point p1 = sp.GetPoint(0, 0, 0);
+            Point p2 = sp.GetPoint(100, 0, 0);
+            Point p3 = sp.GetPoint(100, 100, 0);
+            Point p4 = sp.GetPoint(0, 100, 0);
+            Point p5 = sp.GetPoint(0, 200, 0);
+            Point p6 = sp.GetPoint(100, 200, 0);
 
-            SHPLine l1 = new SHPLine(p1, p2);
-            SHPLine l2 = new SHPLine(p2, p3);
-            SHPLine l3 = new SHPLine(p3, p4);
-            SHPLine l4 = new SHPLine(p4, p1);
-            SHPLine l5 = new SHPLine(p3, p6);
-            SHPLine l6 = new SHPLine(p4, p5);
-            SHPLine l7 = new SHPLine(p5, p6);
+            Line l1 = new Line(p1, p2);
+            Line l2 = new Line(p2, p3);
+            Line l3 = new Line(p3, p4);
+            Line l4 = new Line(p4, p1);
+            Line l5 = new Line(p3, p6);
+            Line l6 = new Line(p4, p5);
+            Line l7 = new Line(p5, p6);
 
             sp.AddLine(l1);
             sp.AddLine(l2);
@@ -165,24 +165,24 @@ namespace ShapeConsole
         public static void ConvertTest()
         {
             // Translate data and add the the shapes
-            SHPDocument sp = new SHPDocument();
+            Document sp = new Document();
 
             // Assume that we identify from the DXF the points
             // the aim would be to round to some level of 
             // resolution then build the shape
 
-            SHPPoint p1 = sp.GetPoint(0, 0, 0);
-            SHPPoint p2 = sp.GetPoint(10, 0, 0);
-            SHPPoint p3 = sp.GetPoint(10, 0, 0);
-            SHPPoint p4 = sp.GetPoint(20, 0, 0);
+            Point p1 = sp.GetPoint(0, 0, 0);
+            Point p2 = sp.GetPoint(10, 0, 0);
+            Point p3 = sp.GetPoint(10, 0, 0);
+            Point p4 = sp.GetPoint(20, 0, 0);
 
-            SHPLine l1 = new SHPLine(p1, p2);
+            Line l1 = new Line(p1, p2);
         }
 
         public static void ItterateTest()
         {
-            SHPDocument sp = new SHPDocument();
-            sp.AddLine(new SHPLine(sp.GetPoint(0, 0, 0), sp.GetPoint(10, 0, 0)));
+            Document sp = new Document();
+            sp.AddLine(new Line(sp.GetPoint(0, 0, 0), sp.GetPoint(10, 0, 0)));
             sp.AddShape(sp.GetPoint(1, 1, 1));
             foreach (IShape sh in sp)
             {
@@ -195,7 +195,7 @@ namespace ShapeConsole
         /// </summary>
         public static void EndpointTest()
         {
-            SHPDocument sp = new SHPDocument();
+            Document sp = new Document();
 
             // need to create points and lines and confirm that only the endpoints intersect
             /*
@@ -204,13 +204,13 @@ namespace ShapeConsole
              *         p3   p4
              */
 
-            SHPPoint p1 = sp.GetPoint(0, 0, 0);
-            SHPPoint p2 = sp.GetPoint(10, 0, 0);
-            SHPPoint p3 = sp.GetPoint(10, 0, 0);
-            SHPPoint p4 = sp.GetPoint(20, 0, 0);
+            Point p1 = sp.GetPoint(0, 0, 0);
+            Point p2 = sp.GetPoint(10, 0, 0);
+            Point p3 = sp.GetPoint(10, 0, 0);
+            Point p4 = sp.GetPoint(20, 0, 0);
 
-            SHPLine l1 = new SHPLine(p1, p2);
-            SHPLine l2 = new SHPLine(p3, p4);
+            Line l1 = new Line(p1, p2);
+            Line l2 = new Line(p3, p4);
 
             // Confirm that lines referncing the points
             // are updated
@@ -225,7 +225,7 @@ namespace ShapeConsole
         /// </summary>
         public static void PolyTest()
         {
-            SHPDocument sp = new SHPDocument();
+            Document sp = new Document();
 
             // need to create points and lines and confirm that a polygon is formed
             /*
@@ -237,15 +237,15 @@ namespace ShapeConsole
              *    
              */
 
-            SHPPoint p1 = sp.GetPoint(0, 0, 0);
-            SHPPoint p2 = sp.GetPoint(100, 0, 0);
-            SHPPoint p3 = sp.GetPoint(100, 100, 0);
-            SHPPoint p4 = sp.GetPoint(0, 100, 0);
+            Point p1 = sp.GetPoint(0, 0, 0);
+            Point p2 = sp.GetPoint(100, 0, 0);
+            Point p3 = sp.GetPoint(100, 100, 0);
+            Point p4 = sp.GetPoint(0, 100, 0);
 
-            SHPLine l1 = new SHPLine(p1, p2);
-            SHPLine l2 = new SHPLine(p2, p3);
-            SHPLine l3 = new SHPLine(p3, p4);
-            SHPLine l4 = new SHPLine(p4, p1);
+            Line l1 = new Line(p1, p2);
+            Line l2 = new Line(p2, p3);
+            Line l3 = new Line(p3, p4);
+            Line l4 = new Line(p4, p1);
 
             // need to add lines to shapes
 
@@ -264,20 +264,20 @@ namespace ShapeConsole
 
         public static void QuadTest()
         {
-            QuadTree<SHPPoint> qt = new QuadTree<SHPPoint>();
-            SHPPoint p1 = new SHPPoint(0, 0, 0);
-            qt.Bounds = new SHPRectangle(p1, 100, 100);
-            SHPPoint p2 = new SHPPoint(10, 10, 0);
-            qt.Insert(p2, new SHPRectangle(p2, 1, 1));
-            SHPPoint p3 = new SHPPoint(10, 90, 0);
-            qt.Insert(p3, new SHPRectangle(p3, 1, 1));
-            SHPPoint p4 = new SHPPoint(90, 90, 0);
-            qt.Insert(p4, new SHPRectangle(p4, 1, 1));
-            SHPPoint p5 = new SHPPoint(90, 10, 0);
-            qt.Insert(p5, new SHPRectangle(p5, 1, 1));
+            QuadTree<Point> qt = new QuadTree<Point>();
+            Point p1 = new Point(0, 0, 0);
+            qt.Bounds = new Rectangle(p1, 100, 100);
+            Point p2 = new Point(10, 10, 0);
+            qt.Insert(p2, new Rectangle(p2, 1, 1));
+            Point p3 = new Point(10, 90, 0);
+            qt.Insert(p3, new Rectangle(p3, 1, 1));
+            Point p4 = new Point(90, 90, 0);
+            qt.Insert(p4, new Rectangle(p4, 1, 1));
+            Point p5 = new Point(90, 10, 0);
+            qt.Insert(p5, new Rectangle(p5, 1, 1));
 
-            SHPPoint p6 = new SHPPoint(5, 5, 0);
-            foreach (SHPPoint p in qt.GetNodesInside(new SHPRectangle(p6, 10, 10)))
+            Point p6 = new Point(5, 5, 0);
+            foreach (Point p in qt.GetNodesInside(new Rectangle(p6, 10, 10)))
             {
                 Console.WriteLine(p.ToString());
             }
@@ -303,21 +303,21 @@ namespace ShapeConsole
              *
              */
 
-            SHPDocument sp = new SHPDocument();
+            Document sp = new Document();
 
-            SHPPoint p1 = sp.GetPoint(50, 0, 0);
-            SHPPoint p2 = sp.GetPoint(50, 100, 0);
-            SHPPoint p3 = sp.GetPoint(0, 50, 0);
-            SHPPoint p4 = sp.GetPoint(100, 50, 0);
+            Point p1 = sp.GetPoint(50, 0, 0);
+            Point p2 = sp.GetPoint(50, 100, 0);
+            Point p3 = sp.GetPoint(0, 50, 0);
+            Point p4 = sp.GetPoint(100, 50, 0);
 
-            SHPLine l1 = new SHPLine(p1, p2);
-            SHPLine l2 = new SHPLine(p3, p4);
+            Line l1 = new Line(p1, p2);
+            Line l2 = new Line(p3, p4);
             Console.WriteLine("Intersect=" + l1.IntersectsWith(l2));
 
-            SHPPoint p5 = new SHPPoint(50, 25, 0);
+            Point p5 = new Point(50, 25, 0);
 
-            l1 = new SHPLine(p1, p5);
-            l2 = new SHPLine(p3, p4);
+            l1 = new Line(p1, p5);
+            l2 = new Line(p3, p4);
             Console.WriteLine("Intersect=" + l1.IntersectsWith(l2));
         }
 
@@ -336,13 +336,13 @@ namespace ShapeConsole
              *  
              */
 
-            SHPDocument sp = new SHPDocument();
+            Document sp = new Document();
 
-            SHPPoint p1 = sp.GetPoint(30, 30, 0);
-            SHPPoint p2 = sp.GetPoint(60, 90, 0);
+            Point p1 = sp.GetPoint(30, 30, 0);
+            Point p2 = sp.GetPoint(60, 90, 0);
 
-            SHPRectangle r1 = new SHPRectangle(p1, 50, 50);
-            SHPRectangle r2 = new SHPRectangle(p2, 20, 80);
+            Rectangle r1 = new Rectangle(p1, 50, 50);
+            Rectangle r2 = new Rectangle(p2, 20, 80);
             Console.WriteLine("contains=" + r2.Contains(r1));
             Console.WriteLine("contains=" + r1.Contains(r2));
             Console.WriteLine("intersect=" + r2.IntersectsWith(r1));
@@ -360,9 +360,9 @@ namespace ShapeConsole
             Console.WriteLine("----------");
 
             p1 = sp.GetPoint(30, 30, 0);
-            r1 = new SHPRectangle(p1, 70, 70);
+            r1 = new Rectangle(p1, 70, 70);
             p2 = sp.GetPoint(20, 20, 0);
-            r2 = new SHPRectangle(p2, 60, 60);
+            r2 = new Rectangle(p2, 60, 60);
             
             Console.WriteLine("contains=" + r2.Contains(r1));
             Console.WriteLine("contains=" + r1.Contains(r2));
@@ -381,9 +381,9 @@ namespace ShapeConsole
             Console.WriteLine("----------");
 
             p1 = sp.GetPoint(30, 30, 0);
-            r1 = new SHPRectangle(p1, 40, 40);
+            r1 = new Rectangle(p1, 40, 40);
             p2 = sp.GetPoint(30, 30, 0);
-            r2 = new SHPRectangle(p2, 40, 40);
+            r2 = new Rectangle(p2, 40, 40);
             Console.WriteLine("contains=" + r2.Contains(r1));
             Console.WriteLine("contains=" + r1.Contains(r2));
             Console.WriteLine("intersect=" + r2.IntersectsWith(r1));
@@ -404,9 +404,9 @@ namespace ShapeConsole
         }
     }
 
-    class PointComparer : IEqualityComparer<SHPPoint>
+    class PointComparer : IEqualityComparer<Point>
     {
-        public bool Equals(SHPPoint x, SHPPoint y)
+        public bool Equals(Point x, Point y)
         {
             if (x.X.Equals(y.X) != true)
             {
@@ -426,7 +426,7 @@ namespace ShapeConsole
             }
         }
 
-        public int GetHashCode(SHPPoint SHPPoint)
+        public int GetHashCode(Point SHPPoint)
         {
             return HashCode.Combine(SHPPoint.X, SHPPoint.Y, SHPPoint.Z);
         }

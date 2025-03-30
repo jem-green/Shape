@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ShapeLibrary
 {
-    public class SHPPoint : SHPShape, IShape, IComparable, IComparable<SHPPoint>
+    public class Point : Shape, IShape, IComparable, IComparable<Point>
     {
         #region Fields
 
@@ -17,13 +17,13 @@ namespace ShapeLibrary
 
         #endregion
         #region Constructor
-        public SHPPoint()
+        public Point()
         {
             _type = ShapeType.Point;
             _shapes = new List<IShape>();
         }
 
-        public SHPPoint(double x, double y, double z)
+        public Point(double x, double y, double z)
         {
             _type = ShapeType.Point;
             _shapes = new List<IShape>();
@@ -98,7 +98,7 @@ namespace ShapeLibrary
         {
             bool intersect = true;
 
-            if (shape.GetType() == typeof(SHPPoint))
+            if (shape.GetType() == typeof(Point))
             {
                 
             }
@@ -120,7 +120,7 @@ namespace ShapeLibrary
 
         public override bool Equals(object obj)
         {
-            SHPPoint point = (SHPPoint)obj;
+            Point point = (Point)obj;
 
             if (_x.Equals(point.X) != true)
             {
@@ -145,7 +145,7 @@ namespace ShapeLibrary
             return (HashCode.Combine(_x, _y, _z));
         }
 
-        int IComparable<SHPPoint>.CompareTo(SHPPoint other)
+        int IComparable<Point>.CompareTo(Point other)
         {
             if (_x.CompareTo(other.X) != 0)
             {
@@ -167,7 +167,7 @@ namespace ShapeLibrary
 
         public int CompareTo(object obj)
         {
-            SHPPoint other = (SHPPoint)obj;
+            Point other = (Point)obj;
 
             if (_x.CompareTo(other.X) != 0)
             {

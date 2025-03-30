@@ -4,39 +4,39 @@ using System.Text;
 
 namespace ShapeLibrary
 {
-    public class SHPLine : SHPShape, IShape
+    public class Line : Shape, IShape
     {
         #region Field
 
-        SHPPoint _from;
-        SHPPoint _to;
+        Point _from;
+        Point _to;
 
         #endregion
         #region Constructor
 
-        public SHPLine()
+        public Line()
         {
             _type = ShapeType.Line;
         }
 
-        public SHPLine(SHPPoint from, SHPPoint to)
+        public Line(Point from, Point to)
         {
             _type = ShapeType.Line;
             _from = from;
             _to = to;
         }
 
-        public SHPLine(double x1, double y1,double z1, double x2, double y2, double z2)
+        public Line(double x1, double y1,double z1, double x2, double y2, double z2)
         {
             _type = ShapeType.Line;
-            _from = new SHPPoint(x1,y1,z1);
-            _to = new SHPPoint(x2,y2,z2);
+            _from = new Point(x1,y1,z1);
+            _to = new Point(x2,y2,z2);
         }
 
         #endregion
         #region Properties
 
-        public SHPPoint From
+        public Point From
         {
             get
             {
@@ -47,7 +47,7 @@ namespace ShapeLibrary
                 _from = value;
             }
         }
-        public SHPPoint To
+        public Point To
         {
             get
             {
@@ -65,14 +65,14 @@ namespace ShapeLibrary
         {
             bool intersect = true;
 
-            if (shape.GetType() == typeof(SHPLine))
+            if (shape.GetType() == typeof(Line))
             {
-                SHPLine line = (SHPLine)shape; 
+                Line line = (Line)shape; 
 
-                SHPPoint p1 = _from;
-                SHPPoint p2 = _to;
-                SHPPoint p3 = line.From;
-                SHPPoint p4 = line.To;
+                Point p1 = _from;
+                Point p2 = _to;
+                Point p3 = line.From;
+                Point p4 = line.To;
 
                 // Get the segments' parameters.
 

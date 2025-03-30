@@ -8,20 +8,20 @@ using System.Text;
 
 namespace ShapeLibrary
 {
-    public class SHPDocument : IEnumerable<IShape>
+    public class Document : IEnumerable<IShape>
     {
         #region Fields
         
         private List<IShape> _shapes;
-        private List<SHPPoint> _points;
+        private List<Point> _points;
         
         #endregion
         #region Constructors
 
-        public SHPDocument()
+        public Document()
         {
             _shapes = new List<IShape>();
-            _points = new List<SHPPoint>();
+            _points = new List<Point>();
         }
 
         #endregion
@@ -33,7 +33,7 @@ namespace ShapeLibrary
         /// Add a point directly
         /// </summary>
         /// <param name="point"></param>
-        public void AddPoint(SHPPoint point)
+        public void AddPoint(Point point)
         {
             _points.Add(point);
         }
@@ -42,7 +42,7 @@ namespace ShapeLibrary
         /// Add line directly
         /// </summary>
         /// <param name="line"></param>
-        public void AddLine(SHPLine line)
+        public void AddLine(Line line)
         {
             // Need to link the edge to a point
             // i dont want to necessarily add this
@@ -61,37 +61,37 @@ namespace ShapeLibrary
         /// Add rectangle directly
         /// </summary>
         /// <param name="rectangle"></param>
-        public void AddRectangle(SHPRectangle rectangle)
+        public void AddRectangle(Rectangle rectangle)
         {
             // Assume that the point have already been added
             // so we can avoid adding twice
 
-            SHPPoint p1 = rectangle.TopLeft;
+            Point p1 = rectangle.TopLeft;
 
             // Generate the remaining points
 
-            SHPPoint p2 = GetPoint(p1.X + rectangle.Width, p1.Y,p1.Z);
-            SHPPoint p3 = GetPoint(p1.X + rectangle.Width, p1.Y-rectangle.Y, p1.Z);
-            SHPPoint p4 = GetPoint(p1.X, p1.Y - rectangle.Y, p1.Z);
+            Point p2 = GetPoint(p1.X + rectangle.Width, p1.Y,p1.Z);
+            Point p3 = GetPoint(p1.X + rectangle.Width, p1.Y-rectangle.Y, p1.Z);
+            Point p4 = GetPoint(p1.X, p1.Y - rectangle.Y, p1.Z);
 
             // Convert the rectangle into lines
 
-            SHPLine l1 = new SHPLine(p1, p2);
+            Line l1 = new Line(p1, p2);
             p1.AddShape(l1);
             p2.AddShape(l1);
             _shapes.Add(l1);
 
-            SHPLine l2 = new SHPLine(p2, p3);
+            Line l2 = new Line(p2, p3);
             p2.AddShape(l2);
             p3.AddShape(l2);
             _shapes.Add(l2);
 
-            SHPLine l3 = new SHPLine(p3, p4);
+            Line l3 = new Line(p3, p4);
             p3.AddShape(l3);
             p4.AddShape(l3);
             _shapes.Add(l3);
 
-            SHPLine l4 = new SHPLine(p4, p1);
+            Line l4 = new Line(p4, p1);
             p4.AddShape(l4);
             p1.AddShape(l4);
             _shapes.Add(l4);
@@ -105,17 +105,17 @@ namespace ShapeLibrary
         /// <param name="shape"></param>
         public void AddShape(IShape shape)
         {
-            if (shape.GetType() == typeof(SHPLine))
+            if (shape.GetType() == typeof(Line))
             {
-                AddLine((SHPLine)shape);
+                AddLine((Line)shape);
             }
-            else if (shape.GetType() == typeof(SHPPoint))
+            else if (shape.GetType() == typeof(Point))
             {
-                AddPoint((SHPPoint)shape);
+                AddPoint((Point)shape);
             }
-            else if (shape.GetType() == typeof(SHPRectangle))
+            else if (shape.GetType() == typeof(Rectangle))
             {
-                AddRectangle((SHPRectangle)shape);
+                AddRectangle((Rectangle)shape);
             }
             else
             {
@@ -132,9 +132,9 @@ namespace ShapeLibrary
         /// <param name="y"></param>
         /// <param name="z"></param>
         /// <returns></returns>
-        public SHPPoint GetPoint(double x, double y, double z)
+        public Point GetPoint(double x, double y, double z)
         {
-            SHPPoint point = new SHPPoint(x, y, z);
+            Point point = new Point(x, y, z);
             int pos = _points.BinarySearch(point);
             if (pos < 0)
             {
@@ -160,43 +160,43 @@ namespace ShapeLibrary
             // the same approach which is to build it as we go.
 
             Console.WriteLine("Reset");
-            foreach(SHPPoint point in _points)
+            foreach(Point point in _points)
             {
-                point.Status = SHPShape.SearchStatus.None;
+                point.Status = Shape.SearchStatus.None;
             }
 
             // Now check through the points
 
             Console.WriteLine("Check which points are connected");
-            foreach (SHPPoint point in _points)
+            foreach (Point point in _points)
             {
-                if (point.Status == SHPShape.SearchStatus.Linked)
+                if (point.Status == Shape.SearchStatus.Linked)
                 {
                     Console.WriteLine("Try to link");
 
                 }
-                else if (point.Status == SHPShape.SearchStatus.None)
+                else if (point.Status == Shape.SearchStatus.None)
                 {
                     Console.WriteLine("Try to simplify");
 
                     // Find all the points that are connected
 
-                    List<SHPPoint> connected = new List<SHPPoint>();
+                    List<Point> connected = new List<Point>();
                     DepthFirstSearch(connected, point);
 
                     // Sort the list by degree
 
                     Console.WriteLine("Sort points by degree");
                     connected.Sort(
-                        delegate (SHPPoint p1, SHPPoint p2)
+                        delegate (Point p1, Point p2)
                         {
                             return p1.Degree.CompareTo(p2.Degree);
                         }
                     );
 
-                    foreach (SHPPoint newPoint in connected)
+                    foreach (Point newPoint in connected)
                     {
-                        if ((newPoint.Status & SHPShape.SearchStatus.Linked) == 0)
+                        if ((newPoint.Status & Shape.SearchStatus.Linked) == 0)
                         {
                             Console.WriteLine("Link shapes");
                             List<IShape> chain = new List<IShape>();
@@ -236,15 +236,15 @@ namespace ShapeLibrary
             BinaryWriter binaryWriter = new BinaryWriter(new FileStream(filenamePath + ".shp", FileMode.OpenOrCreate));
             binaryWriter.Seek(0, SeekOrigin.Begin); // Move to start of the file
 
-            foreach (SHPShape shape in _shapes)
+            foreach (Shape shape in _shapes)
             {
-                SHPShape.ShapeType shapeType = shape.Type;  // 1 byte
-                if (shapeType == SHPShape.ShapeType.Line)
+                Shape.ShapeType shapeType = shape.Type;  // 1 byte
+                if (shapeType == Shape.ShapeType.Line)
                 {
-                    SHPLine line = (SHPLine)shape;
+                    Line line = (Line)shape;
                     binaryWriter.Write((byte)shapeType);
-                    SHPPoint from = line.From;
-                    SHPPoint to = line.To;
+                    Point from = line.From;
+                    Point to = line.To;
                     binaryWriter.Write((double)from.X);     // 8 bytes
                     binaryWriter.Write((double)from.Y);     // 8 bytes
                     binaryWriter.Write((double)to.X);       // 8 bytes
@@ -272,15 +272,15 @@ namespace ShapeLibrary
                     do
                     {
                         byte type = binaryReader.ReadByte();
-                        if (type == (byte)SHPShape.ShapeType.Line)
+                        if (type == (byte)Shape.ShapeType.Line)
                         {
                             double X = binaryReader.ReadDouble();
                             double Y = binaryReader.ReadDouble();
-                            SHPPoint from = new SHPPoint(X, Y, 0);
+                            Point from = new Point(X, Y, 0);
                             X = binaryReader.ReadDouble();
                             Y = binaryReader.ReadDouble();
-                            SHPPoint to = new SHPPoint(X, Y, 0);
-                            SHPLine line = new SHPLine(from, to);
+                            Point to = new Point(X, Y, 0);
+                            Line line = new Line(from, to);
                             _shapes.Add(line);
                         }
                     } while (binaryReader.BaseStream.Position != binaryReader.BaseStream.Length);
@@ -299,7 +299,7 @@ namespace ShapeLibrary
         #endregion
         #region Private
 
-        private void LinkSearch(List<IShape> chain, SHPPoint newPoint)
+        private void LinkSearch(List<IShape> chain, Point newPoint)
         {
             // This search aims to link the points together into long chains
             // only want to choose points from the connected list
@@ -307,8 +307,8 @@ namespace ShapeLibrary
             // line endings
 
             bool searching = true;
-            newPoint.Status |= SHPShape.SearchStatus.Start;
-            SHPPoint point;
+            newPoint.Status |= Shape.SearchStatus.Start;
+            Point point;
             do
             {
                 point = newPoint;
@@ -317,23 +317,23 @@ namespace ShapeLibrary
                 {
                     foreach (IShape shape in point.Shapes)
                     {
-                        if (shape.GetType() == typeof(SHPPoint))
+                        if (shape.GetType() == typeof(Point))
                         {
                             // check if we enter here
                             searching = false;
                             break;
                         }
-                        else if (shape.GetType() == typeof(SHPLine))
+                        else if (shape.GetType() == typeof(Line))
                         {
-                            SHPLine line = (SHPLine)shape;
+                            Line line = (Line)shape;
 
-                            if (line.Status == SHPShape.SearchStatus.None)
+                            if (line.Status == Shape.SearchStatus.None)
                             {
-                                line.Status |= SHPShape.SearchStatus.Visited;
+                                line.Status |= Shape.SearchStatus.Visited;
                                 if (point == line.To)
                                 {
                                     // Swap ends
-                                    SHPPoint temp = line.To;
+                                    Point temp = line.To;
                                     line.To = line.From;
                                     line.From = temp;
                                 }
@@ -341,14 +341,14 @@ namespace ShapeLibrary
                                 chain.Add(line);
 
                                 newPoint = line.To;
-                                newPoint.Status |= SHPShape.SearchStatus.Linked;
+                                newPoint.Status |= Shape.SearchStatus.Linked;
 
                                 if (newPoint.Degree == 1)
                                 {
-                                    newPoint.Status |= SHPShape.SearchStatus.End;
+                                    newPoint.Status |= Shape.SearchStatus.End;
                                     searching = false;
                                 }
-                                else if ((newPoint.Status & SHPShape.SearchStatus.Start) == SHPShape.SearchStatus.Start)
+                                else if ((newPoint.Status & Shape.SearchStatus.Start) == Shape.SearchStatus.Start)
                                 {
                                     searching = false;
                                 }
@@ -373,10 +373,10 @@ namespace ShapeLibrary
 
         }
 
-        private void DepthFirstSearch(List<SHPPoint> connected, SHPPoint point)
+        private void DepthFirstSearch(List<Point> connected, Point point)
         {
             Console.WriteLine("point=" + point);
-            point.Status = SHPShape.SearchStatus.Visited;
+            point.Status = Shape.SearchStatus.Visited;
             if (point.Degree > 0)
             {
                 // Trap the case where points are isolated
@@ -385,9 +385,9 @@ namespace ShapeLibrary
                 foreach (IShape shape in point.Shapes)
                 {
 
-                    if (shape.GetType() == typeof(SHPLine))
+                    if (shape.GetType() == typeof(Line))
                     {
-                        SHPLine line = (SHPLine)shape;
+                        Line line = (Line)shape;
 
                         // May have ends reversed but would
                         // be good to assume that there is
@@ -395,7 +395,7 @@ namespace ShapeLibrary
 
                         if (point == line.From)
                         {
-                            if (line.To.Status == SHPShape.SearchStatus.None)
+                            if (line.To.Status == Shape.SearchStatus.None)
                             {
                                 Console.WriteLine("line=" + line);
                                 DepthFirstSearch(connected, line.To);
@@ -403,7 +403,7 @@ namespace ShapeLibrary
                         }
                         else
                         {
-                            if (line.From.Status == SHPShape.SearchStatus.None)
+                            if (line.From.Status == Shape.SearchStatus.None)
                             {
                                 Console.WriteLine("line=" + line);
                                 DepthFirstSearch(connected, line.From);

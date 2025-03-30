@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ShapeLibrary
 {
-    public class SHPArc : SHPShape, IShape
+    public class Arc : Shape, IShape
     {
         // Assue that the axis is defined as 0,0 is bottom left
         // as this fits better with plotter and paper based
@@ -12,9 +12,9 @@ namespace ShapeLibrary
 
         #region Field
 
-        SHPPoint _from;
-        SHPPoint _center;
-        SHPPoint _to;
+        Point _from;
+        Point _center;
+        Point _to;
 
         double _radius;
         double _start;
@@ -24,12 +24,12 @@ namespace ShapeLibrary
         #endregion
         #region Constructor
 
-        public SHPArc()
+        public Arc()
         {
             _type = ShapeType.Arc;
         }
 
-        public SHPArc(SHPPoint from, SHPPoint to, double radius)
+        public Arc(Point from, Point to, double radius)
         {
             _type = ShapeType.Arc;
             _from = from;
@@ -43,7 +43,7 @@ namespace ShapeLibrary
 
         }
 
-        public SHPArc(SHPPoint center, double radius, double start, double end)
+        public Arc(Point center, double radius, double start, double end)
         {
             _type = ShapeType.Arc;
 
@@ -58,7 +58,7 @@ namespace ShapeLibrary
 
         }
 
-        public SHPArc(SHPPoint from, SHPPoint center, SHPPoint to)
+        public Arc(Point from, Point center, Point to)
         {
             _type = ShapeType.Arc;
 
@@ -78,7 +78,7 @@ namespace ShapeLibrary
         #endregion
         #region Properties
 
-        public SHPPoint From
+        public Point From
         {
             get
             {
@@ -89,7 +89,7 @@ namespace ShapeLibrary
                 _from = value;
             }
         }
-        public SHPPoint To
+        public Point To
         {
             get
             {
@@ -101,7 +101,7 @@ namespace ShapeLibrary
             }
         }
 
-        public SHPPoint Center
+        public Point Center
         {
             get
             {
@@ -184,14 +184,14 @@ namespace ShapeLibrary
         {
             bool intersect = true;
 
-            if (shape.GetType() == typeof(SHPLine))
+            if (shape.GetType() == typeof(Line))
             {
-                SHPLine line = (SHPLine)shape;
+                Line line = (Line)shape;
 
-                SHPPoint p1 = _from;
-                SHPPoint p2 = _to;
-                SHPPoint p3 = line.From;
-                SHPPoint p4 = line.To;
+                Point p1 = _from;
+                Point p2 = _to;
+                Point p3 = line.From;
+                Point p4 = line.To;
 
                 // Get the segments' parameters.
 

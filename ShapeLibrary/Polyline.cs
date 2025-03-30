@@ -4,23 +4,23 @@ using System.Text;
 
 namespace ShapeLibrary
 {
-    public class SHPPolyline : SHPShape, IShape
+    public class Polyline : Shape, IShape
     {
         #region Fields
 
-        private List<SHPPoint> _points;
+        private List<Point> _points;
         private bool _visited = false;
 
         #endregion
         #region Constructor
 
-        public SHPPolyline()
+        public Polyline()
         {
             _type = ShapeType.Polyline;
-            _points = new List<SHPPoint>();
+            _points = new List<Point>();
         }
 
-        public SHPPolyline(List<SHPPoint> points)
+        public Polyline(List<Point> points)
         {
             _type = ShapeType.Polyline;
             _points = points;
@@ -37,7 +37,7 @@ namespace ShapeLibrary
             }
         }
 
-        public SHPPoint this[int index]
+        public Point this[int index]
         {
             get
             {
@@ -74,7 +74,7 @@ namespace ShapeLibrary
         {
             bool intersect = true;
 
-            if (shape.GetType() == typeof(SHPPoint))
+            if (shape.GetType() == typeof(Point))
             {
 
             }
@@ -85,7 +85,7 @@ namespace ShapeLibrary
             return (intersect);
         }
 
-        public void Add(SHPPoint line)
+        public void Add(Point line)
         {
             _points.Add(line);
         }
@@ -93,7 +93,7 @@ namespace ShapeLibrary
         public override string ToString()
         {
             string data = "";
-            foreach (SHPPoint point in _points)
+            foreach (Point point in _points)
             {
                 data = data + ("point=" + point + ",");
             }
@@ -103,7 +103,7 @@ namespace ShapeLibrary
         public string ToJSON()
         {
             string data = "";
-            foreach (SHPPoint point in _points)
+            foreach (Point point in _points)
             {
                 data = data + "{point\":" + point + "},";
             }

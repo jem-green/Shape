@@ -16,7 +16,7 @@ namespace ShapeLibrary
     /// </summary>
     public class QuadTree<T> where T : class
     {
-        SHPRectangle bounds; // overall bounds we are indexing.
+        Rectangle bounds; // overall bounds we are indexing.
         Quadrant root;
         IDictionary<T, Quadrant> table;
 
@@ -24,7 +24,7 @@ namespace ShapeLibrary
         /// This determines the overall quad-tree indexing strategy, changing this bounds
         /// is expensive since it has to re-divide the entire thing - like a re-hash operation.
         /// </summary>
-        public SHPRectangle Bounds
+        public Rectangle Bounds
         {
             get { return this.bounds; }
             set { this.bounds = value; ReIndex(); }
@@ -35,7 +35,7 @@ namespace ShapeLibrary
         /// </summary>
         /// <param name="node">The node to insert</param>
         /// <param name="bounds">The bounds of this node</param>
-        public void Insert(T node, SHPRectangle bounds)
+        public void Insert(T node, Rectangle bounds)
         {
             if (this.bounds.Width == 0 || this.bounds.Height == 0)
             {
@@ -66,7 +66,7 @@ namespace ShapeLibrary
         /// </summary>
         /// <param name="bounds">The bounds to test</param>
         /// <returns>List of zero or mode nodes found inside the given bounds</returns>
-        public IEnumerable<T> GetNodesInside(SHPRectangle bounds)
+        public IEnumerable<T> GetNodesInside(Rectangle bounds)
         {
             foreach (QuadNode n in GetNodes(bounds))
             {
@@ -79,7 +79,7 @@ namespace ShapeLibrary
         /// </summary>
         /// <param name="bounds">The bounds to test</param>
         /// <returns>List of zero or mode nodes found inside the given bounds</returns>
-        public bool HasNodesInside(SHPRectangle bounds)
+        public bool HasNodesInside(Rectangle bounds)
         {
             if (this.root == null)
             {
@@ -93,7 +93,7 @@ namespace ShapeLibrary
         /// </summary>
         /// <param name="bounds">The bounds to test</param>
         /// <returns>The list of nodes intersecting the given bounds</returns>
-        IEnumerable<QuadNode> GetNodes(SHPRectangle bounds)
+        IEnumerable<QuadNode> GetNodes(Rectangle bounds)
         {
             List<QuadNode> result = new List<QuadNode>();
             if (this.root != null)
@@ -140,7 +140,7 @@ namespace ShapeLibrary
         /// </summary>
         internal class QuadNode
         {
-            SHPRectangle bounds;
+            Rectangle bounds;
             QuadNode next; // linked in a circular list.
             T node; // the actual visual object being stored here.
 
@@ -149,7 +149,7 @@ namespace ShapeLibrary
             /// </summary>
             /// <param name="node">The node</param>
             /// <param name="bounds">The bounds of that node</param>
-            public QuadNode(T node, SHPRectangle bounds)
+            public QuadNode(T node, Rectangle bounds)
             {
                 this.node = node;
                 this.bounds = bounds;
@@ -167,7 +167,7 @@ namespace ShapeLibrary
             /// <summary>
             /// The Rect bounds of the node
             /// </summary>
-            public SHPRectangle Bounds
+            public Rectangle Bounds
             {
                 get { return this.bounds; }
             }
@@ -191,7 +191,7 @@ namespace ShapeLibrary
         internal class Quadrant
         {
             Quadrant parent;
-            SHPRectangle bounds; // quadrant bounds.
+            Rectangle bounds; // quadrant bounds.
 
             QuadNode nodes; // nodes that overlap the sub quadrant boundaries.
 
@@ -208,7 +208,7 @@ namespace ShapeLibrary
             /// </summary>
             /// <param name="parent">The parent quadrant (if any)</param>
             /// <param name="bounds">The bounds of this quadrant</param>
-            public Quadrant(Quadrant parent, SHPRectangle bounds)
+            public Quadrant(Quadrant parent, Rectangle bounds)
             {
                 this.parent = parent;
                 if (bounds.Width == 0 || bounds.Height == 0)
@@ -229,7 +229,7 @@ namespace ShapeLibrary
             /// <summary>
             /// The bounds of this quadrant
             /// </summary>
-            internal SHPRectangle Bounds
+            internal Rectangle Bounds
             {
                 get { return this.bounds; }
             }
@@ -240,7 +240,7 @@ namespace ShapeLibrary
             /// <param name="node">The node </param>
             /// <param name="bounds">The bounds of that node</param>
             /// <returns></returns>
-            internal Quadrant Insert(T node, SHPRectangle bounds)
+            internal Quadrant Insert(T node, Rectangle bounds)
             {
                 if (bounds.Width == 0 || bounds.Height == 0)
                 {
@@ -264,15 +264,15 @@ namespace ShapeLibrary
                     // assumption that the Rect struct is almost as fast as doing the operations
                     // manually since Rect is a value type.
 
-                    SHPPoint p1 = new SHPPoint(this.bounds.Left, this.bounds.Top, 0);
-                    SHPPoint p2 = new SHPPoint(this.bounds.Left + w, this.bounds.Top, 0);
-                    SHPPoint p3 = new SHPPoint(this.bounds.Left, this.bounds.Top - h, 0);
-                    SHPPoint p4 = new SHPPoint(this.bounds.Left + w, this.bounds.Top - h, 0);
+                    Point p1 = new Point(this.bounds.Left, this.bounds.Top, 0);
+                    Point p2 = new Point(this.bounds.Left + w, this.bounds.Top, 0);
+                    Point p3 = new Point(this.bounds.Left, this.bounds.Top - h, 0);
+                    Point p4 = new Point(this.bounds.Left + w, this.bounds.Top - h, 0);
 
-                    SHPRectangle topLeft = new SHPRectangle(p1, w, h);
-                    SHPRectangle topRight = new SHPRectangle(p2, w, h);
-                    SHPRectangle bottomLeft = new SHPRectangle(p3, w, h);
-                    SHPRectangle bottomRight = new SHPRectangle(p4, w, h);
+                    Rectangle topLeft = new Rectangle(p1, w, h);
+                    Rectangle topRight = new Rectangle(p2, w, h);
+                    Rectangle bottomLeft = new Rectangle(p3, w, h);
+                    Rectangle bottomRight = new Rectangle(p4, w, h);
 
                     Quadrant child = null;
 
@@ -340,7 +340,7 @@ namespace ShapeLibrary
             /// </summary>
             /// <param name="nodes">List of nodes found in the given bounds</param>
             /// <param name="bounds">The bounds that contains the nodes you want returned</param>
-            internal void GetIntersectingNodes(List<QuadNode> nodes, SHPRectangle bounds)
+            internal void GetIntersectingNodes(List<QuadNode> nodes, Rectangle bounds)
             {
                 if (bounds.IsEmpty) return;
                 double w = this.bounds.Width / 2;
@@ -349,15 +349,15 @@ namespace ShapeLibrary
                 // assumption that the Rect struct is almost as fast as doing the operations
                 // manually since Rect is a value type.
 
-                SHPPoint p1 = new SHPPoint(this.bounds.Left, this.bounds.Top, 0);
-                SHPPoint p2 = new SHPPoint(this.bounds.Left + w, this.bounds.Top, 0);
-                SHPPoint p3 = new SHPPoint(this.bounds.Left, this.bounds.Top - h, 0);
-                SHPPoint p4 = new SHPPoint(this.bounds.Left + w, this.bounds.Top - h, 0);
+                Point p1 = new Point(this.bounds.Left, this.bounds.Top, 0);
+                Point p2 = new Point(this.bounds.Left + w, this.bounds.Top, 0);
+                Point p3 = new Point(this.bounds.Left, this.bounds.Top - h, 0);
+                Point p4 = new Point(this.bounds.Left + w, this.bounds.Top - h, 0);
 
-                SHPRectangle topLeft = new SHPRectangle(p1, w, h);
-                SHPRectangle topRight = new SHPRectangle(p2, w, h);
-                SHPRectangle bottomLeft = new SHPRectangle(p3, w, h);
-                SHPRectangle bottomRight = new SHPRectangle(p4, w, h);
+                Rectangle topLeft = new Rectangle(p1, w, h);
+                Rectangle topRight = new Rectangle(p2, w, h);
+                Rectangle bottomLeft = new Rectangle(p3, w, h);
+                Rectangle bottomRight = new Rectangle(p4, w, h);
 
                 // See if any child quadrants completely contain this node.
                 if (topLeft.IntersectsWith(bounds) && this.topLeft != null)
@@ -390,7 +390,7 @@ namespace ShapeLibrary
             /// <param name="last">The last QuadNode in a circularly linked list</param>
             /// <param name="nodes">The resulting nodes are added to this list</param>
             /// <param name="bounds">The bounds to test against each node</param>
-            static void GetIntersectingNodes(QuadNode last, List<QuadNode> nodes, SHPRectangle bounds)
+            static void GetIntersectingNodes(QuadNode last, List<QuadNode> nodes, Rectangle bounds)
             {
                 if (last != null)
                 {
@@ -411,7 +411,7 @@ namespace ShapeLibrary
             /// </summary>
             /// <param name="bounds">The bounds to test</param>
             /// <returns>boolean</returns>
-            internal bool HasIntersectingNodes(SHPRectangle bounds)
+            internal bool HasIntersectingNodes(Rectangle bounds)
             {
                 if (bounds.IsEmpty) return false;
                 double w = this.bounds.Width / 2;
@@ -420,15 +420,15 @@ namespace ShapeLibrary
                 // assumption that the Rect struct is almost as fast as doing the operations
                 // manually since Rect is a value type.
 
-                SHPPoint p1 = new SHPPoint(this.bounds.Left, this.bounds.Top, 0);
-                SHPPoint p2 = new SHPPoint(this.bounds.Left + w, this.bounds.Top, 0);
-                SHPPoint p3 = new SHPPoint(this.bounds.Left, this.bounds.Top - h, 0);
-                SHPPoint p4 = new SHPPoint(this.bounds.Left + w, this.bounds.Top - h, 0);
+                Point p1 = new Point(this.bounds.Left, this.bounds.Top, 0);
+                Point p2 = new Point(this.bounds.Left + w, this.bounds.Top, 0);
+                Point p3 = new Point(this.bounds.Left, this.bounds.Top - h, 0);
+                Point p4 = new Point(this.bounds.Left + w, this.bounds.Top - h, 0);
 
-                SHPRectangle topLeft = new SHPRectangle(p1, w, h);
-                SHPRectangle topRight = new SHPRectangle(p2, w, h);
-                SHPRectangle bottomLeft = new SHPRectangle(p3, w, h);
-                SHPRectangle bottomRight = new SHPRectangle(p4, w, h);
+                Rectangle topLeft = new Rectangle(p1, w, h);
+                Rectangle topRight = new Rectangle(p2, w, h);
+                Rectangle bottomLeft = new Rectangle(p3, w, h);
+                Rectangle bottomRight = new Rectangle(p4, w, h);
 
                 bool found = false;
 
@@ -465,7 +465,7 @@ namespace ShapeLibrary
             /// <param name="last">The last node in the circularly linked list.</param>
             /// <param name="bounds">Bounds to test</param>
             /// <returns>Return true if a node in the list intersects the bounds</returns>
-            static bool HasIntersectingNodes(QuadNode last, SHPRectangle bounds)
+            static bool HasIntersectingNodes(QuadNode last, Rectangle bounds)
             {
                 if (last != null)
                 {
